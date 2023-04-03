@@ -1,20 +1,25 @@
 package com.loogika.ysearch.network.di.webservice
 
-import com.loogika.ysearch.network.di.model.Data
-import com.loogika.ysearch.network.di.model.home.HomeResponse
-import com.loogika.ysearch.network.di.model.proposal.ProposalResponse
-import com.loogika.ysearch.network.di.model.schedule.ScheduleResponse
+import com.loogika.ysearch.network.di.model.search.NextVideoRequest
+import com.loogika.ysearch.network.di.model.search.NextVideoResponse
+import com.loogika.ysearch.network.di.model.search.SearchResponse
 import retrofit2.Response
-import retrofit2.http.GET
+import retrofit2.http.*
 
 interface WebServiceApi {
+    companion object {
+        const val API_VERSION = "v1/"
+    }
 
-    @GET("josearroyo/getHome")
-    suspend fun getHomeInfo() : Response<Data<HomeResponse>>
+    @GET("${API_VERSION}videos/search")
+    suspend fun search(
+        @Query("text") text: String,
+        @Query("lan") language: String,
+        @Query("ac") accent: String,
+    ) : Response<SearchResponse>
 
-    @GET("josearroyo/getProposal")
-    suspend fun getProposalInfo() : Response<Data<List<ProposalResponse>>>
-
-    @GET("josearroyo/getSchedule")
-    suspend fun getScheduleInfo() : Response<Data<List<ScheduleResponse>>>
+    @POST("${API_VERSION}videos/next")
+    suspend fun nextVideo(
+        @Body data: NextVideoRequest
+    ) : Response<SearchResponse>
 }

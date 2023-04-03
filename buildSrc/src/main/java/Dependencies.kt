@@ -8,9 +8,9 @@ object Modules {
     const val domain = ":domain"
     const val uikit = ":uikit"
     const val dashboard = ":dashboard"
-    const val home = ":home"
-    const val homeData = ":homedata"
+    const val searchData = ":searchdata"
     const val search = ":search"
+    const val network = ":network"
 }
 
 object TestLibraries {

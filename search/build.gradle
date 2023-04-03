@@ -9,6 +9,7 @@ android {
 dependencies {
     implementation project(path: Modules.core)
     implementation project(path: Modules.uikit)
+    implementation project(path: Modules.domain)
 
     // accompanist
     implementation(Accompanist.accompanistPager)

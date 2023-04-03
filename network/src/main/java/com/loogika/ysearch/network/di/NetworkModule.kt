@@ -21,7 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
+    private const val URL = "$API_HOST/api/"
     @Provides
     fun provideOkHttpClient(@ApplicationContext appContext: Context
     ): OkHttpClient {
@@ -42,7 +42,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(@ApplicationContext appContext: Context, okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
-            .baseUrl(API_HOST)
+            .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

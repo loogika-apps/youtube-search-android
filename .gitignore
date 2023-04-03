@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+/buildSrc/build
+
+# Android Studio
+/*/build/
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.ipr
+*.swp

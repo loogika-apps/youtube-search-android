@@ -1,26 +1,27 @@
-package com.josearroyo.app.domain.proposal
+package com.loogika.ysearch.domain.search
 
-import com.josearroyo.app.domain.proposal.mapper.toProposalResult
-import com.josearroyo.app.domain.usecase.EmptyParameterFlowUseCase
-import com.josearroyo.app.domain.viewstate.UIState
-import com.josearroyo.app.proposaldata.datasource.ProposalDataSource
-import com.josearroyo.app.proposaldata.model.ProposalResult
-import com.loogika.mikroisp.network.di.util.ErrorType
-import com.loogika.mikroisp.network.di.util.ResultType
+import com.loogika.ysearch.domain.search.mapper.toSearchResult
+import com.loogika.ysearch.domain.usecase.FlowUseCase
+import com.loogika.ysearch.domain.viewstate.UIState
+import com.loogika.ysearch.network.di.util.ErrorType
+import com.loogika.ysearch.network.di.util.ResultType
+import com.loogika.ysearch.searchdata.datasource.SearchDataSource
+import com.loogika.ysearch.searchdata.model.SearchParams
+import com.loogika.ysearch.searchdata.model.SearchResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetProposalUseCase @Inject constructor(
-    private val proposalDataSource: ProposalDataSource,
-) : EmptyParameterFlowUseCase<List<ProposalResult>>() {
-    override suspend fun execute()
-            : Flow<UIState<List<ProposalResult>>> =
-        proposalDataSource.getProposalInfo()
+class SearchUseCase @Inject constructor(
+    private val searchDataSource: SearchDataSource,
+) : FlowUseCase<SearchParams, SearchResult?>() {
+    override suspend fun execute(parameters: SearchParams)
+            : Flow<UIState<SearchResult?>> =
+        searchDataSource.search(parameters.text, parameters.language, parameters.accent)
             .map { result ->
                 if (result is ResultType.Success) {
                     return@map UIState.Success(
-                        result.value?.map { it.toProposalResult() } ?: emptyList()
+                        result.value?.toSearchResult()
                     )
                 }
 
