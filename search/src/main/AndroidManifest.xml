@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.loogika.ysearch.search">
+    <application>
+        <activity
+            android:name=".SearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.YSearch"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+    </application>
+</manifest>

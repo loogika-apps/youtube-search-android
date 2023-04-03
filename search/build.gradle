@@ -1,0 +1,21 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../basegradle/baseui.gradle'
+android {
+    namespace 'com.loogika.ysearch.search'
+}
+dependencies {
+    implementation project(path: Modules.core)
+    implementation project(path: Modules.uikit)
+
+    // accompanist
+    implementation(Accompanist.accompanistPager)
+    implementation(Accompanist.accompanistIndicators)
+    implementation(Accompanist.accompanistNavigation)
+    implementation Accompanist.accompanistNavigationMaterial
+}
+kapt {
+    correctErrorTypes true
+}
